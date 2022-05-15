@@ -33,13 +33,18 @@ export default function DenseAppBar() {
     >
       <List>
         {SidebarData.map((manuItem, index) => (
-          <ListItem key={manuItem.title} component={Link} to={manuItem.path} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <manuItem.icon />
-                </ListItemIcon>
-                <ListItemText primary={manuItem.title} />
-              </ListItemButton>
+          <ListItem
+            key={manuItem.title}
+            component={Link}
+            to={manuItem.path}
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <manuItem.icon />
+              </ListItemIcon>
+              <ListItemText primary={manuItem.title} />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
@@ -60,7 +65,7 @@ export default function DenseAppBar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h5" color="inherit" component="div">
+            <Typography variant="h5" color="inherit" component={Link} to="/" sx={{textDecoration:'none'}}>
               Fatima Memorial Hospital
             </Typography>
           </Toolbar>

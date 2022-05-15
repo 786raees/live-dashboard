@@ -7,7 +7,7 @@ function Layout() {
     <>
       <CssBaseline />
       <NavBar />
-      <Outlet/>
+      <Outlet></Outlet>
     </>
   );
 }
