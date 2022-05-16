@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card } from "@mui/material";
 import { Line } from "react-chartjs-2";
-// import LiveDashboardServices from '../services/LiveDashboardServices';
+import LiveDashboardServices from './services/LiveDashboardServices';
 
 export default class Dashboard_OPD_datewiseCountsL1 extends Component {
   constructor(props) {
@@ -59,24 +59,24 @@ export default class Dashboard_OPD_datewiseCountsL1 extends Component {
     };
   }
 
-  //   componentDidMount() {
-  //     LiveDashboardServices.getLast30DaysOPDCountsL1().then((res) => {
-  //       var labels = [];
-  //       // datekey=  res.data.forEach(sub_array => labels.push(sub_array[0]));
-  //       res.data.forEach(sub_array => labels.push(sub_array[0].substr(0, 2)));
-  //       //res.data.forEach(sub_array => labels.push(sub_array[0]));
-  //       var counts1 = [];
-  //       var counts2 = [];
-  //       res.data.forEach(sub_array => counts1.push(sub_array[1]));
-  //       res.data.forEach(sub_array => counts2.push(sub_array[2]));
+    componentDidMount() {
+      LiveDashboardServices.getLast30DaysOPDCountsL1().then((res) => {
+        var labels = [];
+        // datekey=  res.data.forEach(sub_array => labels.push(sub_array[0]));
+        res.data.forEach(sub_array => labels.push(sub_array[0].substr(0, 2)));
+        //res.data.forEach(sub_array => labels.push(sub_array[0]));
+        var counts1 = [];
+        var counts2 = [];
+        res.data.forEach(sub_array => counts1.push(sub_array[1]));
+        res.data.forEach(sub_array => counts2.push(sub_array[2]));
 
-  //       const newCharData = Object.assign({}, this.state.chartData);
-  //       newCharData.labels = labels
-  //       newCharData.datasets[0].data = counts1
-  //       newCharData.datasets[1].data = counts2
-  //       this.setState({ chartData: newCharData });
-  //     })
-  //   }
+        const newCharData = Object.assign({}, this.state.chartData);
+        newCharData.labels = labels
+        newCharData.datasets[0].data = counts1
+        newCharData.datasets[1].data = counts2
+        this.setState({ chartData: newCharData });
+      })
+    }
 
   render() {
     const options = {
