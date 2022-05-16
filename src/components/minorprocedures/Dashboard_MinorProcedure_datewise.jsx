@@ -1,30 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
-import 'chartjs-plugin-datalabels';
-import LiveDashboardServices from '../services/LiveDashboardServices';
-import {
-  Card
-} from '@material-ui/core';
+import "chartjs-plugin-datalabels";
+// import LiveDashboardServices from '../services/LiveDashboardServices';
+import { Card } from "@mui/material";
 
-
-export default class Dashboard_OPD_datewiseCountsL1 extends Component{ 
-  constructor(props){
+export default class Dashboard_MinorProcedure_datewise extends Component {
+  constructor(props) {
     super(props);
     this.state = {
-      chartData: {        
-        labels: '',
+      chartData: {
+        labels: "",
         datasets: [
           {
-            label: 'No Of Minor Procedures',            
-            data: '',            
+            label: "No Of Minor Procedures",
+            data: "",
             fill: false,
             lineTension: 0.75,
             backgroundColor: "rgba(225,0,0,0.4)",
             borderColor: "#00CC00", // The main line color
-            borderCapStyle: 'square',
+            borderCapStyle: "square",
             borderDash: [], // try [5, 15] for instance
             borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
+            borderJoinStyle: "miter",
             pointBorderColor: "black",
             pointBackgroundColor: "white",
             pointBorderWidth: 1,
@@ -35,53 +32,53 @@ export default class Dashboard_OPD_datewiseCountsL1 extends Component{
             pointRadius: 4,
             pointHitRadius: 10,
             spanGaps: true,
-            }, {
-              label: "PMC Requirement",
-              fill: false,
-              lineTension: 0.75,
-              backgroundColor: "red",
-              borderColor: "black",
-              borderCapStyle: 'butt',
-              borderDash: [],
-              borderDashOffset: 0.0,
-              borderJoinStyle: 'miter',
-              pointBorderColor: "black",
-              pointBackgroundColor: "white",
-              pointBorderWidth: 1,
-              pointHoverRadius: 8,
-              pointHoverBackgroundColor: "brown",
-              pointHoverBorderColor: "yellow",
-              pointHoverBorderWidth: 2,
-              pointRadius: 4,
-              pointHitRadius: 10,
-              // notice the gap in the data and the spanGaps: false
-              data:' ',
-              spanGaps: false,
-            }
-        ]       
-    },
-    }
+          },
+          {
+            label: "PMC Requirement",
+            fill: false,
+            lineTension: 0.75,
+            backgroundColor: "red",
+            borderColor: "black",
+            borderCapStyle: "butt",
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: "miter",
+            pointBorderColor: "black",
+            pointBackgroundColor: "white",
+            pointBorderWidth: 1,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: "brown",
+            pointHoverBorderColor: "yellow",
+            pointHoverBorderWidth: 2,
+            pointRadius: 4,
+            pointHitRadius: 10,
+            // notice the gap in the data and the spanGaps: false
+            data: " ",
+            spanGaps: false,
+          },
+        ],
+      },
+    };
   }
 
-  componentDidMount(){
-    LiveDashboardServices.getLast30DaysMinProcL1().then((res) => {      
-      var labels = [];
-     // datekey=  res.data.forEach(sub_array => labels.push(sub_array[0]));
-      res.data.forEach(sub_array => labels.push(sub_array[0].substr(0,2)));   
-      //res.data.forEach(sub_array => labels.push(sub_array[0]));               
-      var counts1 = [];
-      var counts2 = [];
-      res.data.forEach(sub_array => counts1.push(sub_array[1]));
-      res.data.forEach(sub_array => counts2.push(sub_array[2]));
+  // componentDidMount(){
+  //   LiveDashboardServices.getLast30DaysMinProcL1().then((res) => {
+  //     var labels = [];
+  //    // datekey=  res.data.forEach(sub_array => labels.push(sub_array[0]));
+  //     res.data.forEach(sub_array => labels.push(sub_array[0].substr(0,2)));
+  //     //res.data.forEach(sub_array => labels.push(sub_array[0]));
+  //     var counts1 = [];
+  //     var counts2 = [];
+  //     res.data.forEach(sub_array => counts1.push(sub_array[1]));
+  //     res.data.forEach(sub_array => counts2.push(sub_array[2]));
 
-      const newCharData = Object.assign({}, this.state.chartData);    
-      newCharData.labels = labels
-      newCharData.datasets[0].data = counts1
-      newCharData.datasets[1].data = counts2
-      this.setState({chartData: newCharData});
-  })  
-  }
- 
+  //     const newCharData = Object.assign({}, this.state.chartData);
+  //     newCharData.labels = labels
+  //     newCharData.datasets[0].data = counts1
+  //     newCharData.datasets[1].data = counts2
+  //     this.setState({chartData: newCharData});
+  // })
+  // }
 
   render() {
     const options = {
@@ -90,58 +87,57 @@ export default class Dashboard_OPD_datewiseCountsL1 extends Component{
         position: this.props.legendPosition,
       },*/
       scales: {
-        xAxes: [
-          {
-            display: true,
-             ticks: {
-              fontColor: "blue",
-              fontSize: 14,
-              fontWeight: 'bold',
-            },
-                    }
-        ],
-        yAxes: [{
-          type: 'linear',
+        xAxes: {
           display: true,
-            ticks: {
-              fontColor: "black",
-              fontSize: 12,
-              fontWeight: 'bold'
-            }
-        }]
-      
-      }
+          ticks: {
+            fontColor: "blue",
+            fontSize: 14,
+            fontWeight: "bold",
+          },
+        },
+        yAxes: {
+          type: "linear",
+          display: true,
+          ticks: {
+            fontColor: "black",
+            fontSize: 12,
+            fontWeight: "bold",
+          },
+        },
+      },
     };
-
 
     // Line Chart Properties
     const LineChartLabelOptions = {
       plugins: {
         datalabels: {
           display: false,
-          color: 'white',
-          backgroundColor:"#4B0082",
-          anchor: 'end',          
-          align: 'bottom',
-          fontSize: 12
-       },
+          color: "white",
+          backgroundColor: "#4B0082",
+          anchor: "end",
+          align: "bottom",
+          fontSize: 12,
+        },
       },
     };
 
-     
-    return (    
-     <div>
-     <Card style={{borderColor: 'red', }}>
-      <h5 style={{ color: 'white', textAlign: 'center', background: '#00CC00'  }}>Date wise Minor Procedures for the Last 30 Days</h5>
+    return (
       <div>
-        <Line height ="110px"
-          data={this.state.chartData}
-          options={Object.assign({}, options,LineChartLabelOptions )}
-        />
+        <Card style={{ borderColor: "red" }}>
+          <div className="text-center rounded-t-xl bg-green-700 text-white p-3 border-b-4 border-green-900">
+            <h4 className="text-3xl">
+              Date wise Minor Procedures for the Last 30 Days
+            </h4>
+          </div>
+          <div>
+            <Line
+              height="110px"
+              data={this.state.chartData}
+              options={Object.assign({}, options, LineChartLabelOptions)}
+            />
+          </div>
+        </Card>
       </div>
-    </Card>
-    </div>
-   );
+    );
+  }
 }
-}
-
